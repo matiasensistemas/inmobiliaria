@@ -72,7 +72,7 @@ input, select, textarea {
 	appearance: none;
 }
 
-.parent {
+.parent2 {
 display: grid;
 grid-template-columns: repeat(7, 1fr);
 grid-template-rows: repeat(15, 1fr);
