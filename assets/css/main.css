@@ -72,6 +72,14 @@ input, select, textarea {
 	appearance: none;
 }
 
+.parent {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+grid-template-rows: repeat(15, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
 /* Basic */
 
 	@-ms-viewport {
