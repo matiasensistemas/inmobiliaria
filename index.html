@@ -8,7 +8,7 @@
 	<head>
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4074783685914223"
      crossorigin="anonymous"></script>
-		
+		<script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
 		<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWQTQ1P73"></script>
 <script>
@@ -126,10 +126,19 @@
 		<script>
 		const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
 		const main = document.querySelector("main");
-		fetch(url).then(result=>result.text()).then(csvtext=>main.innerHTML=csvtext);
+		fetch(url).then(result=>result.text()).then(function(csvtext){
+			return csv().fromString(csvtext);
+		}).then(function(csv)
+			{
+				main.innerHTML = "<code>" + JSON,stringify(csv) + "</code>";
+			})
+							    
+							    ;
 		</script>
 		
 		<script src="assets/js/jquery.min.js">
+
+		
 			
 		</script>
 		
