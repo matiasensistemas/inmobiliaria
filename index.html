@@ -123,11 +123,15 @@
 			</div>
 
 		<!-- Scripts -->
+		<script>
 		const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
 		const main = document.querySelector("main");
 		fetch(url).then(result=>result.text()).then(csvtext=>main.innerHTML=csvtext);
+		</script>
 		
-		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.min.js">
+			
+		</script>
 		
 			
 		
