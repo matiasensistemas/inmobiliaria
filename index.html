@@ -71,7 +71,12 @@
 						
 
 									</div>
+				<main">
+				
+				</main>
 
+
+				</div>
 				<!-- Contact -->
 					<section id="contact">
 						<div class="inner">
@@ -120,7 +125,7 @@
 		<!-- Scripts -->
 		const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
 		const main = document.querySelector("main");
-		fetch(url).then(result=>result.text().then(csvtext=>main.innerHTML=csvtext);
+		fetch(url).then(result=>result.text()).then(csvtext=>main.innerHTML=csvtext);
 		
 		<script src="assets/js/jquery.min.js"></script>
 		
