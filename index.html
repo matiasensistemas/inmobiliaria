@@ -132,8 +132,18 @@
 			return csv().fromString(csvtext);
 		}).then(function(csv)
 			{
+				csv.forEach(function(row) {
+					
 				//main.innerHTML = "<code>" + JSON,stringify(csv) + "</code>";
-				main.innerHTML += "<h3>" + 
+				main.innerHTML += "<h3>" + row.NAME + "</h3>";
+				main.innerHTML += "<p>" + row.ADDRESS;
+				main.innerHTML += "<p>" + row.PHONE;
+				main.innerHTML += "<p>" + row.ANOTHERPHONE;
+				main.innerHTML += "<p>" + row.ADDRESS;
+				main.innerHTML += "<p>" + row.WHATSAPP;	
+				main.innerHTML += "<p>" + row.WEBSITE;
+				main.innerHTML += "<p>" + row.EMAIL;
+				main.innerHTML += "</p>";
 			})
 							    
 							    ;
