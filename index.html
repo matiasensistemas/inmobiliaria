@@ -24,8 +24,7 @@
 			const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
 			const main = document.querySelector("#main"); // Target the correct element
 
-			if (main) {
-				main.innerHTML = "<p>Loading...</p>";
+			main.innerHTML = "<p>Loading...</p>";
 				fetch(url)
 					.then(result => result.text())
 					.then(function(csvtext) {
@@ -49,7 +48,7 @@
 							main.innerHTML = "<p>Error loading data.</p>";
 						}
 					});
-			}
+			
 		</script>
 
 		<div id="wrapper">
