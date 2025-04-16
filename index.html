@@ -31,7 +31,7 @@
 						return CSV().fromString(csvtext); // Assuming 'CSV()' is the correct way
 					})
 					.then(function(csvData) {
-						main.innerHTML = ""; // Clear the loading message
+						
 						csvData.forEach(function(row) {
 							main.innerHTML += "<h3>" + row.NAME + "</h3>";
 							main.innerHTML += "<p>" + row.ADDRESS + "</p>";
@@ -40,6 +40,7 @@
 							main.innerHTML += "<p>" + row.WHATSAPP + "</p>";
 							main.innerHTML += "<p>" + row.WEBSITE + "</p>";
 							main.innerHTML += "<p>" + row.EMAIL + "</p>";
+							
 						});
 					})
 					.catch(error => {
