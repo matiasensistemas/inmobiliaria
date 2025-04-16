@@ -1,22 +1,18 @@
+HTML
+
 <!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4074783685914223"
-     crossorigin="anonymous"></script>
+     crossorigin="anonymous"></script>
 		<script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
-		<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWQTQ1P73"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWQTQ1P73"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  gtag('config', 'G-MDWQTQ1P73');
+  gtag('config', 'G-MDWQTQ1P73');
 </script>
 		<title>INMOBILIARIAS CAPITAL FEDERAL</title>
 		<meta charset="utf-8" />
@@ -26,65 +22,60 @@
 	</head>
 	<body>
 
+		<script>
+			const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
+			const main = document.querySelector("#main"); // Target the correct element
 
-	<script>
-		
-	const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
-	const main = document.querySelector("main");
-
-	main.innerHTML = "<p>Loading...</p>";
-	fetch(url).then(result=>result.text()).then(function(csvtext){return csv().fromString(csvtext);
-								     
-								     
-		return csv().fromString(csvtext);
-		}).then(function(csv) 
-		{
-		csv.forEach(function(row)
-		{
-		main.innerHTML += "<h3>" + row.NAME + "</h3>";
-		main.innerHTML += "<p>" + row.ADDRESS;
-		main.innerHTML += "<p>" + row.PHONE;
-		main.innerHTML += "<p>" + row.ANOTHERPHONE;
-		main.innerHTML += "<p>" + row.ADDRESS;
-		main.innerHTML += "<p>" + row.WHATSAPP;	
-		main.innerHTML += "<p>" + row.WEBSITE;
-		main.innerHTML += "<p>" + row.EMAIL;
-		main.innerHTML += "</p>";
-		}
-		}				    
-							    ;
+			if (main) {
+				main.innerHTML = "<p>Loading...</p>";
+				fetch(url)
+					.then(result => result.text())
+					.then(function(csvtext) {
+						return CSV().fromString(csvtext); // Assuming 'CSV()' is the correct way
+					})
+					.then(function(csvData) {
+						main.innerHTML = ""; // Clear the loading message
+						csvData.forEach(function(row) {
+							main.innerHTML += "<h3>" + row.NAME + "</h3>";
+							main.innerHTML += "<p>" + row.ADDRESS + "</p>";
+							main.innerHTML += "<p>" + row.PHONE + "</p>";
+							main.innerHTML += "<p>" + row.ANOTHERPHONE + "</p>";
+							main.innerHTML += "<p>" + row.WHATSAPP + "</p>";
+							main.innerHTML += "<p>" + row.WEBSITE + "</p>";
+							main.innerHTML += "<p>" + row.EMAIL + "</p>";
+						});
+					})
+					.catch(error => {
+						console.error("Error fetching or processing CSV:", error);
+						if (main) {
+							main.innerHTML = "<p>Error loading data.</p>";
+						}
+					});
+			}
 		</script>
 
+		<div id="wrapper">
 
-		
-	<!-- <body class="is-preload"> -->
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header" class="alt">
+				<header id="header" class="alt">
 						<a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
 					</header>
 
-				<!-- Menu -->
-					<nav id="menu">
+				<nav id="menu">
 						<ul class="links">
 							<li><a href="#listaC">LISTA COMPLETA</a></li>
-							
-							
+
+
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="#" class="button primary fit">Empecemos</a></li>
-							
+
 						</ul>
 					</nav>
 
-				<!-- Banner -->
-					<section id="banner" class="major">
+				<section id="banner" class="major">
 						<div class="inner">
 							<header class="major">
 								<h1>INMOBILIARIAS SUR CAPITAL FEDERAL</h1>
@@ -100,20 +91,12 @@
 
 				<div id="main">
 
-						
 
-				</div>
+					</div>
 
-				<!-- Main -->
-					
-				
-
-
-				</div>
-				<!-- Contact -->
-					<section id="contact">
+				<section id="contact">
 						<div class="inner">
-							
+
 								<section>
 									<div class="contact-method">
 										<span class="icon solid alt fa-phone"></span>
@@ -121,7 +104,7 @@
 										<span>
 											<a href="https://wa.me/+5491170629733?text=Me%20interesan%20los%20servicios%20de%20bainmobiliaria.com.ar!%20" class="link">CONTACTO CON BAINMOBILIARIA.COM.AR!</a>
 											</span>
-										
+
 									</div>
 								</section>
 								<section>
@@ -137,8 +120,7 @@
 						</div>
 					</section>
 
-				<!-- Footer -->
-					<footer id="footer">
+				<footer id="footer">
 						<div class="inner">
 							<ul class="icons">
 								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
@@ -155,27 +137,15 @@
 
 			</div>
 
-		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
 
 
-		
-	
 
-		
-		<script src="assets/js/jquery.min.js">
 
-		
-			
-		</script>
-		
-			
-		
-<!-- Default Statcounter code for inmo
-https://matiasensistemas.github.io/inmobiliaria/ -->
 <script type="text/javascript">
-var sc_project=13089448; 
-var sc_invisible=1; 
-var sc_security="3f5566e5"; 
+var sc_project=13089448;
+var sc_invisible=1;
+var sc_security="3f5566e5";
 </script>
 <script type="text/javascript"
 src="https://www.statcounter.com/counter/counter.js"
@@ -186,7 +156,5 @@ class="statcounter"
 src="https://c.statcounter.com/13089448/0/3f5566e5/1/"
 alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
-	
-	</body>
+</body>
 </html>
