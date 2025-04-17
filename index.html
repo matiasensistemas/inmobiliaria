@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4074783685914223"
-     crossorigin="anonymous"></script>
-		<script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWQTQ1P73"></script>
+<head>
+<title>Inmobiliarias Buenos Aires SUR</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4074783685914223" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWQTQ1P73"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -20,16 +20,14 @@
 	</head>
 	<body>
 
-		<script>
-			const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
-			const main = document.querySelector("#main"); // Target the correct element
+	<script>
+		const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
+		const main = document.querySelector("#main"); // Target the correct element
 
-			main.innerHTML = "<p>Loading...</p>";
-				fetch(url)
-					.then(result => result.text())
-					.then(function(csvtext) {
-						return CSV().fromString(csvtext); // Assuming 'CSV()' is the correct way
-					})
+		main.innerHTML = "<p>Loading...</p>";
+		fetch(url).then(result => result.text()).then(function(csvtext) {
+			return csv().fromString(csvtext); // Assuming 'CSV()' is the correct way
+		})
 					.then(function(csvData) {
 						
 						csvData.forEach(function(row) {
