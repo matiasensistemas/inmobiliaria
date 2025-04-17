@@ -27,26 +27,19 @@
 		main.innerHTML = "<p>Loading...</p>";
 		fetch(url).then(result => result.text()).then(function(csvtext) {
 			return csv().fromString(csvtext); // Assuming 'CSV()' is the correct way
-		})
-					.then(function(csvData) {
-						
-						csvData.forEach(function(row) {
-							main.innerHTML += "<h3>" + row.NAME + "</h3>";
-							main.innerHTML += "<p>" + row.ADDRESS + "</p>";
-							main.innerHTML += "<p>" + row.PHONE + "</p>";
-							main.innerHTML += "<p>" + row.ANOTHERPHONE + "</p>";
-							main.innerHTML += "<p>" + row.WHATSAPP + "</p>";
-							main.innerHTML += "<p>" + row.WEBSITE + "</p>";
-							main.innerHTML += "<p>" + row.EMAIL + "</p>";
+		}).then(function(csv) {
+					csv.forEach(function(row) {
+					main.innerHTML += "<h3>" + row.NAME + "</h3>";
+					main.innerHTML += "<p>" + row.ADDRESS;
+					main.innerHTML += "<p>" + row.PHONE;
+					main.innerHTML += "<p>" + row.ANOTHERPHONE;
+					main.innerHTML += "<p>" + row.WHATSAPP;
+					main.innerHTML += "<p>" + row.WEBSITE;
+					main.innerHTML += "<p>" + row.EMAIL;
+					main.innerHTML += "</p>";
 							
-						});
-					})
-					.catch(error => {
-						console.error("Error fetching or processing CSV:", error);
-						if (main) {
-							main.innerHTML = "<p>Error loading data.</p>";
-						}
 					});
+				});
 			
 		</script>
 
