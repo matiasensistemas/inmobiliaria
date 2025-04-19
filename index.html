@@ -21,30 +21,7 @@
 	<body>
 
 	<main>
-		<script>
-		const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
-		const main = document.querySelector("#main"); // Target the correct element
-
-		main.innerHTML = "<p>Loading...</p>";
-		fetch(url).then(result => result.text()).then(function(csvtext) {
-		return csv().fromString(csvtext); // Assuming 'CSV()' is the correct way
-		}).then(function(csv) {
-					csv.forEach(function(row) {
-					main.innerHTML += "<h3>" + row.NAME + "</h3>";
-					main.innerHTML += "<p>" + row.ADDRESS;
-					main.innerHTML += "<p>" + row.PHONE;
-					main.innerHTML += "<p>" + row.ANOTHERPHONE;
-					main.innerHTML += "<p> WHATSAPP " + row.WHATSAPP;
-					main.innerHTML += '<p> + row.WEBSITE;
-					main.innerHTML += "<p>" + row.EMAIL;
-					
-					main.innerHTML += "</p>";
-							
-					});
-				});
-			
-		</script>
-
+		
 	</main>
 
 	
@@ -87,8 +64,31 @@
 						</div>
 					</section>
 
-				<div id="main">
+	<div id="main">
 
+	<script>
+		const url = "https://docs.google.com/spreadsheets/d/1yS1T9AldX7GtzGi1i84qY4nsN5bXpD1lPXSgpFMibzI/export?format=csv";
+		const main = document.querySelector("#main"); // Target the correct element
+
+		main.innerHTML = "<p>Loading...</p>";
+		fetch(url).then(result => result.text()).then(function(csvtext) {
+		return csv().fromString(csvtext); // Assuming 'CSV()' is the correct way
+		}).then(function(csv) {
+					csv.forEach(function(row) {
+					main.innerHTML += "<h3>" + row.NAME + "</h3>";
+					main.innerHTML += "<p>" + row.ADDRESS;
+					main.innerHTML += "<p>" + row.PHONE;
+					main.innerHTML += "<p>" + row.ANOTHERPHONE;
+					main.innerHTML += "<p> WHATSAPP " + row.WHATSAPP;
+					main.innerHTML += '<p> + row.WEBSITE;
+					main.innerHTML += "<p>" + row.EMAIL;
+					
+					main.innerHTML += "</p>";
+							
+					});
+				});
+			
+		</script>
 
 		
 
