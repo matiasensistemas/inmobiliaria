@@ -84,7 +84,8 @@
 					main.innerHTML += "<p>" + row.ADDRESS;
 					main.innerHTML += "<p>" + row.PHONE;
 					main.innerHTML += "<p>" + row.ANOTHERPHONE;
-					main.innerHTML += "WA <p>" + row.WHATSAPP;
+					main.innerHTML += `<p><a href="https://wa.me/${row.WHATSAPP}">${row.WHATSAPP}?text=WA%20DESDE%20BAINMOBILIARIA.COM.AR%20</a></p>`;
+					
 					main.innerHTML += `<p><a href="${row.WEBSITE}">${row.WEBSITE}</a></p>`;
 					main.innerHTML += "<p>" + row.EMAIL;	
 					
