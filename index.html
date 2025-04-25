@@ -103,6 +103,40 @@
                 <p class="text-gray-700">
                     Posible contenido de la lista:
                     <ul>
+                        <section id="inmo">
+		                <script>
+		                const url = "https://docs.google.com/spreadsheets/d/1eQQiSNg53UuBgKNyfuegX7aamMJfFPTfJ1DREVKhfDo/export?format=csv";
+		                const main = document.querySelector("#main"); // Target the correct element
+
+		                main.innerHTML = "<p>Loading...</p>";
+		                fetch(url).then(result => result.text()).then(function(csvtext) {
+		                return csv().fromString(csvtext); // Assuming 'CSV()' is the correct way
+		            }).then(function(csv) {
+					csv.forEach(function(row) {
+					main.innerHTML += "<h3>" + row.NAME + "</h3>";
+					main.innerHTML += "<p>" + row.ADDRESS;
+					main.innerHTML += "<p>" + row.PHONE;
+					main.innerHTML += "<p>" + row.ANOTHERPHONE;
+					if (row.WHATSAPP) {
+                      main.innerHTML += `<p>WHATSAPP: <a href="https://wa.me/${row.WHATSAPP}">${row.WHATSAPP}</a></p>`;
+                        } else {
+  // You might want to add some alternative behavior here, 
+  // like logging a message or displaying a placeholder.
+                  console.warn("Sin WA");
+                };
+					main.innerHTML += `<p><a href="${row.WEBSITE}">${row.WEBSITE}</a></p>`;
+					main.innerHTML += "<p>" + row.EMAIL;
+					main.innerHTML += "<p>" + `${row.VID}`;
+				    main.innerHTML += "</p>";
+							
+					});
+				});
+			
+		    </script>
+	        </div>
+	        </section>
+
+                        
                         <li>Nombre Inmobiliaria 1</li>
                         <li>Nombre Inmobiliaria 2</li>
                         <li>Nombre Inmobiliaria 3</li>
