@@ -1,184 +1,158 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>INMOBILIARIAS CAPITAL FEDERAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio Inmobiliario | Sur de CABA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4074783685914223" crossorigin="anonymous"></script>
-	
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MDWQTQ1P73"></script>
-	<script>
-  	window.dataLayer = window.dataLayer || [];
- 	 function gtag(){dataLayer.push(arguments);}
- 	 gtag('js', new Date());
-
-  gtag('config', 'G-MDWQTQ1P73');
-</script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Custom styles for the two-column layout */
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        main {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        #primary-content {
-            flex: 2; /* 2/3 of the space */
-            padding-right: 20px;
-        }
-        #secondary-content {
-            flex: 1; /* 1/3 of the space */
-            background-color: #ddd;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
-            #primary-content, #secondary-content {
-                flex: 1;
-                width: 100%;
-                padding-right: 0;
-                margin-bottom: 20px;
-            }
-        }
-
-        .contact-method {
-            margin-bottom: 15px;
-        }
-        .contact-method span {
-            display: block;
-            margin-top: 5px;
-        }
-
+        .directory-row:hover { background-color: #f1f5f9; }
+        .text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-600 text-white py-4">
-        <div class="container mx-auto px-4">
-            <h1 class="text-2xl font-bold">INMOBILIARIAS CAPITAL FEDERAL</h1>
+<body class="bg-slate-50 text-slate-900">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="bg-blue-700 p-2 rounded-lg mr-3">
+                    <i class="fa-solid fa-map-location-dot text-white text-xl"></i>
+                </div>
+                <h1 class="text-2xl font-black tracking-tight text-slate-800">BA INMO <span class="text-blue-700">SUR</span></h1>
+            </div>
+            <div class="relative w-full md:w-96">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-slate-400"></i>
+                <input type="text" id="buscador" placeholder="Buscar barrio o inmobiliaria..." 
+                       class="w-full pl-11 pr-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none transition-all shadow-sm">
+            </div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        <section id="primary-content" class="pr-8">
-            <section id="banner" class="mb-8">
-                <div class="inner">
-                    <header class="major">
-                        <h1>INMOBILIARIAS SUR CAPITAL FEDERAL</h1>
-                    </header>
-                    <div class="content">
-                        <p>INMOBILIARIAS SUR CAPITAL FEDERAL (CABA): PARQUE PATRICIOS, BARRACAS, SAN TELMO Y MÁS</p>
-                        <ul class="actions">
-                            <li><a href="#one" class="button next scrolly">A INVERTIR!</a></li>
-                        </ul>
-                        <p>SIMPLESTATE! INVERTÍ EN USD (HAY UN REGALO EN ESTE LINK)</p>
-                        <ul class="actions">
-                            <li><a href="https://www.simplestate.app/ar/cuenta/crear-cuenta?codigo=REF171247" class="button next scrolly">INVERTÍ EN USD CON PESOS! (APLICAN CONDICIONES Y RIESGOS)</a></li>
-                        </ul>
-                    </div>
+        <div class="mb-6 flex items-center justify-between">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400" id="counter">Sincronizando con base de datos...</h2>
+        </div>
 
+        <div class="bg-white shadow-xl border border-slate-200 rounded-2xl overflow-hidden">
+            <div class="hidden md:grid grid-cols-12 gap-4 bg-slate-800 p-4 font-bold text-white text-xs uppercase tracking-wider">
+                <div class="col-span-3 pl-4 text-blue-200">Inmobiliaria</div>
+                <div class="col-span-2">Barrio</div>
+                <div class="col-span-4">Dirección y Mapa</div>
+                <div class="col-span-3 text-right pr-4">Acciones</div>
+            </div>
+
+            <div id="lista-directorio" class="divide-y divide-slate-100">
                 </div>
-            </section>
-            <section id="main" class="mb-8">
-                <h2 class="text-xl font-semibold mb-4 text-gray-800">LISTA COMPLETA</h2>
-                
-                <p class="text-gray-700">
-                    INMOBILIARIAS SUR DE BUENOS AIRES:
-                    <script>
-		                const url = "https://docs.google.com/spreadsheets/d/1h-jBOB7GPJPWbnik3LDuLUrhOgHJqyj_BREEVXlMXvI/export?format=csv" ;
-		                const main = document.querySelector("#main"); // Target the correct element
+        </div>
 
-		                main.innerHTML = "<p>Loading...</p>";
-		                fetch(url).then(result => result.text()).then(function(csvtext) {
-		                return csv().fromString(csvtext); // Assuming 'CSV()' is the correct way
-		            }).then(function(csv) {
-					csv.forEach(function(row) {
-					main.innerHTML += "<h3>" + row.NAME + "</h3>";
-					main.innerHTML += "<p>" + row.ADDRESS;
-					main.innerHTML += "<p>" + row.PHONE;
-					main.innerHTML += "<p>" + row.ANOTHERPHONE;
-					if (row.WHATSAPP) {
-                      main.innerHTML += `<p>WHATSAPP: <a href="https://wa.me/${row.WHATSAPP}">${row.WHATSAPP}</a></p>`;
-                        } else {
-  // You might want to add some alternative behavior here, 
-  // like logging a message or displaying a placeholder.
-                  console.warn("Sin WA");
-                };
-					main.innerHTML += `<p><a href="${row.WEBSITE}">${row.WEBSITE}</a></p>`;
-					main.innerHTML += "<p>" + row.EMAIL;
-					main.innerHTML += "<p>" + `${row.VID}`;
-					
-					main.innerHTML += "<hr>";	
-					main.innerHTML += "<hr>";
-				    main.innerHTML += "</p>";
-							
-					});
-				});
-			
-		    </script>
-        </section>
-
-        <section id="secondary-content" class="bg-gray-200 rounded-lg p-6">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800">Contacto</h2>
-            <section>
-                <div class="contact-method">
-                    <span class="icon solid alt fa-phone"></span>
-                    <h3>WHATSAPP</h3>
-                    <span>
-                        <a href="https://wa.me/+5491170629733?text=Me%20interesan%20los%20servicios%20de%20bainmobiliaria.com.ar!%20" class="link">CONTACTO CON BAINMOBILIARIA.COM.AR!</a>
-                    </span>
-
-                </div>
-            </section>
-            <section>
-                <div class="contact-method">
-                    <span class="icon solid alt fa-home"></span>
-                    <h3>Address</h3>
-                    <span>PARQUE PATRICIOS<br />
-                    CIUDAD AUTÓNOMA DE BUENOS AIRES<br />
-                    PRIMERO ARGENTINA</span>
-                </div>
-            </section>
-        </section>
+        <div id="no-results" class="hidden text-center py-20">
+            <i class="fa-solid fa-search-location text-5xl text-slate-200 mb-4"></i>
+            <p class="text-slate-500 font-medium">No encontramos resultados para esa búsqueda.</p>
+        </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-4 mt-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>© Untitled</p>
-        </div>
-    </footer>
+    <script>
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuZasKNYxYbalNRDmAflSHMCmZSRXlLYdeOyeqBzl94liVBLXeIIOwZHQUmW5bsSP9bPL_9HhD9gUM/pub?output=csv';
+        let datosInmobiliarias = [];
 
-    
-       <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+        async function init() {
+            try {
+                const response = await fetch(CSV_URL);
+                const csvText = await response.text();
+                const lines = csvText.split(/\r?\n/);
+
+                datosInmobiliarias = lines.slice(1).map(line => {
+                    const v = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if (v.length >= 7) {
+                        return {
+                            nombre: v[0].replace(/"/g, '').trim(),
+                            direccion: v[1].replace(/"/g, '').trim(),
+                            barrio: v[2].replace(/"/g, '').trim(),
+                            telefono: v[3].replace(/"/g, '').trim(),
+                            email: v[4].replace(/"/g, '').trim(),
+                            web: v[5].replace(/"/g, '').trim(),
+                            especialidad: v[6].replace(/"/g, '').trim()
+                        };
+                    }
+                    return null;
+                }).filter(item => item !== null && item.nombre !== "");
+
+                renderizar(datosInmobiliarias);
+            } catch (error) {
+                document.getElementById('counter').innerText = "Error de conexión.";
+            }
+        }
+
+        function renderizar(lista) {
+            const container = document.getElementById('lista-directorio');
+            const counter = document.getElementById('counter');
+            const noResults = document.getElementById('no-results');
+            
+            container.innerHTML = '';
+            counter.innerText = `${lista.length} inmobiliarias en el catálogo`;
+
+            if (lista.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            lista.forEach(inmo => {
+                const waNumber = inmo.telefono.replace(/\D/g,'');
+                // URL para Google Maps
+                const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inmo.nombre + ' ' + inmo.direccion + ' CABA')}`;
+
+                const row = `
+                    <div class="directory-row grid grid-cols-1 md:grid-cols-12 gap-4 p-5 md:items-center">
+                        <div class="col-span-1 md:col-span-3">
+                            <div class="font-bold text-slate-800 text-lg md:text-base">${inmo.nombre}</div>
+                            <div class="text-xs text-blue-600 font-bold uppercase md:hidden">${inmo.barrio}</div>
+                        </div>
+
+                        <div class="hidden md:block col-span-2">
+                            <span class="bg-slate-100 text-slate-600 text-[10px] font-black px-2 py-1 rounded-md uppercase">${inmo.barrio}</span>
+                        </div>
+
+                        <div class="col-span-1 md:col-span-4">
+                            <a href="${mapUrl}" target="_blank" class="group flex items-start text-sm text-slate-500 hover:text-blue-700 transition-colors">
+                                <i class="fa-solid fa-location-arrow mt-1 mr-2 text-slate-300 group-hover:text-blue-500"></i>
+                                <span>
+                                    <span class="block font-medium">${inmo.direccion}</span>
+                                    <span class="text-[10px] text-blue-500 font-bold uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">Ver en Google Maps</span>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="col-span-1 md:col-span-3 flex md:justify-end gap-2 mt-2 md:mt-0">
+                            <a href="${mapUrl}" target="_blank" class="md:hidden flex-1 bg-slate-100 text-slate-700 p-3 rounded-xl text-center text-sm font-bold">
+                                <i class="fa-solid fa-map"></i> Mapa
+                            </a>
+                            <a href="https://wa.me/${waNumber}" target="_blank" class="flex-1 md:flex-none bg-green-500 text-white px-4 py-2.5 rounded-xl hover:bg-green-600 shadow-sm transition text-center">
+                                <i class="fa-brands fa-whatsapp md:mr-1"></i> <span class="hidden md:inline text-xs font-bold">WhatsApp</span>
+                            </a>
+                            <a href="${inmo.web}" target="_blank" class="flex-1 md:flex-none bg-blue-700 text-white px-4 py-2.5 rounded-xl hover:bg-blue-800 shadow-sm transition text-center">
+                                <i class="fa-solid fa-globe md:mr-1"></i> <span class="hidden md:inline text-xs font-bold">Web</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += row;
+            });
+        }
+
+        document.getElementById('buscador').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtrados = datosInmobiliarias.filter(i => 
+                i.nombre.toLowerCase().includes(term) || 
+                i.barrio.toLowerCase().includes(term) ||
+                i.direccion.toLowerCase().includes(term)
+            );
+            renderizar(filtrados);
+        });
+
+        init();
+    </script>
 </body>
 </html>
-
-
-
