@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Directorio Inmobiliario | Sur de CABA</title>
+    <title>BA Inmobiliaria | Guía del Sur de CABA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .directory-row:hover { background-color: #f1f5f9; }
-        .text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .directory-row:hover { background-color: #f8fafc; }
+        @media (max-width: 768px) {
+            .mobile-card { border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #e2e8f0; }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
-<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+<body class="bg-slate-50 text-slate-900 font-sans">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="container mx-auto px-4 py-6">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="text-center md:text-left mb-4 md:mb-0">
-                    <div class="flex items-center justify-center md:justify-start">
-                        <div class="bg-blue-700 p-2 rounded-lg mr-3 shadow-blue-200 shadow-lg">
-                            <i class="fa-solid fa-map-location-dot text-white text-xl"></i>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start mb-2">
+                        <div class="bg-blue-700 p-2 rounded-lg mr-3 shadow-lg shadow-blue-200">
+                            <i class="fa-solid fa-city text-white text-xl"></i>
                         </div>
-                        <h1 class="text-2xl font-black tracking-tight text-slate-800">BA INMO <span class="text-blue-700">SUR</span></h1>
+                        <h1 class="text-2xl font-black tracking-tighter text-slate-800 uppercase">BA INMO<span class="text-blue-700">SUR</span></h1>
                     </div>
-                    <p class="mt-2 text-slate-500 max-w-xl text-sm leading-relaxed">
+                    <p class="text-slate-500 max-w-xl text-sm leading-relaxed">
                         El primer directorio inteligente orientado al <strong>Distrito Tecnológico y barrios del Sur de CABA</strong>. Conectamos propietarios y buscadores con las inmobiliarias más confiables de Barracas, Parque Patricios, San Telmo y alrededores.
                     </p>
                 </div>
                 
                 <div class="relative w-full md:w-80">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-slate-400"></i>
-                    <input type="text" id="buscador" placeholder="Buscar inmobiliaria..." 
-                           class="w-full pl-11 pr-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none transition-all shadow-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+                    <input type="text" id="buscador" placeholder="Filtrar por barrio o nombre..." 
+                           class="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-2xl focus:ring-2 focus:ring-blue-600 focus:outline-none transition-all shadow-sm text-sm">
                 </div>
             </div>
         </div>
@@ -38,23 +41,49 @@
 
     <main class="container mx-auto px-4 py-8">
         
-        <div class="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between shadow-sm">
-            <div class="flex items-center mb-3 md:mb-0">
-                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white mr-3 animate-pulse">
-                    <i class="fa-solid fa-bolt text-xs"></i>
-                </span>
-                <p class="text-sm text-blue-900 font-medium">
-                    <strong>¿Necesitás tasar hoy?</strong> Obtené una tasación preferencial con nuestros expertos aliados.
-                </p>
+        <div class="mb-8 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between shadow-xl shadow-blue-100">
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center mr-4 backdrop-blur-sm animate-pulse">
+                    <i class="fa-solid fa-hand-holding-dollar text-xl text-white"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg leading-none mb-1 text-white">¿Necesitás una tasación express?</h3>
+                    <p class="text-blue-100 text-sm opacity-90">Consultá con nuestro tasador recomendado para el Distrito Tecnológico.</p>
+                </div>
             </div>
-            <a href="https://wa.me/TU_WHATSAPP" target="_blank" class="bg-blue-600 text-white px-6 py-2 rounded-full text-xs font-bold hover:bg-blue-700 transition">
-                CONSULTAR AHORA
+            <a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="bg-white text-blue-700 px-8 py-3 rounded-xl text-sm font-black hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg uppercase tracking-tight">
+                Consultar ahora
             </a>
         </div>
 
-        <div class="mb-6 flex items-center justify-between">
-            <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400" id="counter">Sincronizando...</h2>
+        <div class="mb-4">
+            <span id="counter" class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-200/50 px-3 py-1 rounded-full">
+                Sincronizando base de datos...
+            </span>
         </div>
+
+        <div class="bg-white shadow-sm border border-slate-200 rounded-2xl overflow-hidden">
+            <div class="hidden md:grid grid-cols-12 gap-4 bg-slate-50 border-b border-slate-200 p-4 font-black text-slate-400 text-[10px] uppercase tracking-widest">
+                <div class="col-span-3 pl-4">Inmobiliaria</div>
+                <div class="col-span-2">Barrio</div>
+                <div class="col-span-4">Dirección</div>
+                <div class="col-span-3 text-right pr-4">Contacto</div>
+            </div>
+
+            <div id="lista-directorio" class="divide-y divide-slate-100">
+                </div>
+        </div>
+
+        <div id="no-results" class="hidden text-center py-20">
+            <i class="fa-solid fa-ghost text-4xl text-slate-200 mb-4"></i>
+            <p class="text-slate-400 font-medium">No se encontraron resultados para tu búsqueda.</p>
+        </div>
+    </main>
+
+    <footer class="container mx-auto px-4 py-10 text-center text-slate-400 text-xs">
+        <p>© 2026 BA Inmobiliaria Sur | Propiedad de [Tu Nombre/Empresa]</p>
+        <p class="mt-2 tracking-widest uppercase">Buenos Aires, Argentina</p>
+    </footer>
 
     <script>
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuZasKNYxYbalNRDmAflSHMCmZSRXlLYdeOyeqBzl94liVBLXeIIOwZHQUmW5bsSP9bPL_9HhD9gUM/pub?output=csv';
@@ -67,6 +96,7 @@
                 const lines = csvText.split(/\r?\n/);
 
                 datosInmobiliarias = lines.slice(1).map(line => {
+                    // Regex para manejar comas dentro de celdas
                     const v = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if (v.length >= 7) {
                         return {
@@ -84,7 +114,7 @@
 
                 renderizar(datosInmobiliarias);
             } catch (error) {
-                document.getElementById('counter').innerText = "Error de conexión.";
+                document.getElementById('counter').innerText = "Error cargando datos.";
             }
         }
 
@@ -94,50 +124,45 @@
             const noResults = document.getElementById('no-results');
             
             container.innerHTML = '';
-            counter.innerText = `${lista.length} inmobiliarias en el catálogo`;
+            counter.innerText = `${lista.length} INMOBILIARIAS REGISTRADAS`;
 
             if (lista.length === 0) {
                 noResults.classList.remove('hidden');
                 return;
-            } else {
-                noResults.classList.add('hidden');
             }
+            noResults.classList.add('hidden');
 
             lista.forEach(inmo => {
                 const waNumber = inmo.telefono.replace(/\D/g,'');
-                // URL para Google Maps
-                const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inmo.nombre + ' ' + inmo.direccion + ' CABA')}`;
+                // URL de búsqueda en Google Maps con la dirección y barrio
+                const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inmo.nombre + ' ' + inmo.direccion + ' ' + inmo.barrio + ' CABA')}`;
 
                 const row = `
-                    <div class="directory-row grid grid-cols-1 md:grid-cols-12 gap-4 p-5 md:items-center">
+                    <div class="directory-row grid grid-cols-1 md:grid-cols-12 gap-4 p-5 md:items-center transition-all">
                         <div class="col-span-1 md:col-span-3">
-                            <div class="font-bold text-slate-800 text-lg md:text-base">${inmo.nombre}</div>
-                            <div class="text-xs text-blue-600 font-bold uppercase md:hidden">${inmo.barrio}</div>
+                            <div class="font-bold text-slate-800 text-lg md:text-sm">${inmo.nombre}</div>
+                            <div class="md:hidden text-blue-600 font-bold text-[10px] uppercase mt-1 tracking-wider">${inmo.barrio}</div>
                         </div>
 
                         <div class="hidden md:block col-span-2">
-                            <span class="bg-slate-100 text-slate-600 text-[10px] font-black px-2 py-1 rounded-md uppercase">${inmo.barrio}</span>
+                            <span class="text-xs font-medium text-slate-500 uppercase tracking-tighter">${inmo.barrio}</span>
                         </div>
 
                         <div class="col-span-1 md:col-span-4">
-                            <a href="${mapUrl}" target="_blank" class="group flex items-start text-sm text-slate-500 hover:text-blue-700 transition-colors">
-                                <i class="fa-solid fa-location-arrow mt-1 mr-2 text-slate-300 group-hover:text-blue-500"></i>
-                                <span>
-                                    <span class="block font-medium">${inmo.direccion}</span>
-                                    <span class="text-[10px] text-blue-500 font-bold uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">Ver en Google Maps</span>
+                            <a href="${mapUrl}" target="_blank" class="group inline-flex items-center text-sm text-slate-500 hover:text-blue-600 transition-colors">
+                                <i class="fa-solid fa-location-dot mr-2 text-slate-300 group-hover:text-blue-500"></i>
+                                <span class="border-b border-dotted border-slate-300 group-hover:border-blue-500">
+                                    ${inmo.direccion}
                                 </span>
                             </a>
                         </div>
 
-                        <div class="col-span-1 md:col-span-3 flex md:justify-end gap-2 mt-2 md:mt-0">
-                            <a href="${mapUrl}" target="_blank" class="md:hidden flex-1 bg-slate-100 text-slate-700 p-3 rounded-xl text-center text-sm font-bold">
-                                <i class="fa-solid fa-map"></i> Mapa
+                        <div class="col-span-1 md:col-span-3 flex md:justify-end gap-2 mt-4 md:mt-0">
+                            <a href="https://wa.me/${waNumber}" target="_blank" class="flex-1 md:flex-none bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-green-600 transition shadow-sm">
+                                <i class="fa-brands fa-whatsapp"></i>
                             </a>
-                            <a href="https://wa.me/${waNumber}" target="_blank" class="flex-1 md:flex-none bg-green-500 text-white px-4 py-2.5 rounded-xl hover:bg-green-600 shadow-sm transition text-center">
-                                <i class="fa-brands fa-whatsapp md:mr-1"></i> <span class="hidden md:inline text-xs font-bold">WhatsApp</span>
-                            </a>
-                            <a href="${inmo.web}" target="_blank" class="flex-1 md:flex-none bg-blue-700 text-white px-4 py-2.5 rounded-xl hover:bg-blue-800 shadow-sm transition text-center">
-                                <i class="fa-solid fa-globe md:mr-1"></i> <span class="hidden md:inline text-xs font-bold">Web</span>
+                            <a href="${inmo.web}" target="_blank" class="flex-1 md:flex-none bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> VER WEB
                             </a>
                         </div>
                     </div>
@@ -146,6 +171,7 @@
             });
         }
 
+        // Filtro de búsqueda
         document.getElementById('buscador').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
             const filtrados = datosInmobiliarias.filter(i => 
