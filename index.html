@@ -26,7 +26,7 @@
                         <h1 class="text-2xl font-black tracking-tighter text-slate-800 uppercase">BA INMO<span class="text-blue-700">SUR</span></h1>
                     </div>
                     <p class="text-slate-500 max-w-xl text-sm leading-relaxed">
-                        El primer directorio inteligente orientado al <strong>Distrito Tecnológico y barrios del Sur de CABA</strong>. Conectamos propietarios y buscadores con las inmobiliarias más confiables de Barracas, Parque Patricios, San Telmo y alrededores.
+                        El primer directorio inteligente orientado al <strong>Distrito Tecnológico y barrios del Sur de CABA</strong>. Conectamos propietarios y buscadores con las inmobiliarias más confiables.
                     </p>
                 </div>
                 
@@ -40,7 +40,6 @@
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        
         <div class="mb-8 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between shadow-xl shadow-blue-100">
             <div class="flex items-center mb-4 md:mb-0">
                 <div class="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center mr-4 backdrop-blur-sm animate-pulse">
@@ -48,10 +47,10 @@
                 </div>
                 <div>
                     <h3 class="font-bold text-lg leading-none mb-1 text-white">¿Necesitás una tasación express?</h3>
-                    <p class="text-blue-100 text-sm opacity-90">Consultá con nuestro tasador recomendado para el Distrito Tecnológico.</p>
+                    <p class="text-blue-100 text-sm opacity-90">Consultá con nuestro tasador recomendado para el Sur de CABA.</p>
                 </div>
             </div>
-            <a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="bg-white text-blue-700 px-8 py-3 rounded-xl text-sm font-black hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg uppercase tracking-tight">
+            <a href="https://wa.me/5491112345678" target="_blank" class="bg-white text-blue-700 px-8 py-3 rounded-xl text-sm font-black hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg uppercase tracking-tight">
                 Consultar ahora
             </a>
         </div>
@@ -76,13 +75,12 @@
 
         <div id="no-results" class="hidden text-center py-20">
             <i class="fa-solid fa-ghost text-4xl text-slate-200 mb-4"></i>
-            <p class="text-slate-400 font-medium">No se encontraron resultados para tu búsqueda.</p>
+            <p class="text-slate-400 font-medium">No se encontraron resultados.</p>
         </div>
     </main>
 
     <footer class="container mx-auto px-4 py-10 text-center text-slate-400 text-xs">
         <p>© 2026 BA Inmobiliaria Sur | Propiedad de MATIAS MACAYA</p>
-        <p class="mt-2 tracking-widest uppercase">Buenos Aires, Argentina</p>
     </footer>
 
     <script>
@@ -96,14 +94,13 @@
                 const lines = csvText.split(/\r?\n/);
 
                 datosInmobiliarias = lines.slice(1).map(line => {
-                    // Regex para manejar comas dentro de celdas
                     const v = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if (v.length >= 7) {
                         return {
                             nombre: v[0].replace(/"/g, '').trim(),
                             direccion: v[1].replace(/"/g, '').trim(),
                             barrio: v[2].replace(/"/g, '').trim(),
-                            telefono: v[3].replace(/"/g, '').trim(),
+                            telefono: v[3].replace(/"/g, '').trim(), // Importante: usamos 'telefono'
                             email: v[4].replace(/"/g, '').trim(),
                             web: v[5].replace(/"/g, '').trim(),
                             especialidad: v[6].replace(/"/g, '').trim()
@@ -114,6 +111,7 @@
 
                 renderizar(datosInmobiliarias);
             } catch (error) {
+                console.error(error);
                 document.getElementById('counter').innerText = "Error cargando datos.";
             }
         }
@@ -133,8 +131,12 @@
             noResults.classList.add('hidden');
 
             lista.forEach(inmo => {
-                const waNumber = inmo.telefono.replace(/\D/g,'');
-                // URL de búsqueda en Google Maps con la dirección y barrio
+                // Limpieza estricta del número para WhatsApp (solo números)
+                const waNumber = inmo.telefono ? inmo.telefono.replace(/\D/g,'') : '';
+                
+                // Si el número no tiene código de país, podrías anteponer '549' para Argentina
+                const fullWa = waNumber.startsWith('54') ? waNumber : '549' + waNumber;
+
                 const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inmo.nombre + ' ' + inmo.direccion + ' ' + inmo.barrio + ' CABA')}`;
 
                 const row = `
@@ -148,21 +150,19 @@
                             <span class="text-xs font-medium text-slate-500 uppercase tracking-tighter">${inmo.barrio}</span>
                         </div>
 
-                        <div class="col-span-1 md:col-span-4">
-                            <a href="${mapUrl}" target="_blank" class="group inline-flex items-center text-sm text-slate-500 hover:text-blue-600 transition-colors">
-                                <i class="fa-solid fa-location-dot mr-2 text-slate-300 group-hover:text-blue-500"></i>
-                                <span class="border-b border-dotted border-slate-300 group-hover:border-blue-500">
-                                    ${inmo.direccion}
-                                </span>
+                        <div class="col-span-1 md:col-span-4 text-sm text-slate-500">
+                            <a href="${mapUrl}" target="_blank" class="hover:text-blue-600 flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-slate-300"></i>
+                                <span class="border-b border-dotted border-slate-300">${inmo.direccion}</span>
                             </a>
                         </div>
 
-                        <div class="col-span-1 md:col-span-3 flex md:justify-end gap-2 mt-4 md:mt-0">
-                            <a href="https://wa.me/${waNumber}" target="_blank" class="flex-1 md:flex-none bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-green-600 transition shadow-sm">
-                                <i class="fa-brands fa-whatsapp"></i>
+                        <div class="col-span-1 md:col-span-3 flex md:justify-end gap-2 mt-2 md:mt-0">
+                            <a href="https://wa.me/${fullWa}" target="_blank" class="flex-1 md:flex-none bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-green-600 shadow-sm transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
                             </a>
-                            <a href="${inmo.web}" target="_blank" class="flex-1 md:flex-none bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> VER WEB
+                            <a href="${inmo.web}" target="_blank" class="flex-1 md:flex-none bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition flex items-center justify-center gap-2 uppercase">
+                                <i class="fa-solid fa-globe text-[10px]"></i> Web
                             </a>
                         </div>
                     </div>
@@ -171,7 +171,6 @@
             });
         }
 
-        // Filtro de búsqueda
         document.getElementById('buscador').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
             const filtrados = datosInmobiliarias.filter(i => 
