@@ -135,7 +135,7 @@
                 const waNumber = inmo.telefono ? inmo.telefono.replace(/\D/g,'') : '';
                 
                 // Si el número no tiene código de país, podrías anteponer '549' para Argentina
-                const fullWa = waNumber.startsWith('54') ? waNumber : '549' + waNumber;
+                const fullWa = waNumber.startsWith('54') ? waNumber : waNumber;
 
                 const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(inmo.nombre + ' ' + inmo.direccion + ' ' + inmo.barrio + ' CABA')}`;
 
