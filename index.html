@@ -67,7 +67,7 @@
             </div>
 
             <div id="lista-directorio" class="divide-y divide-slate-100 text-left">
-                </div>
+            </div>
         </div>
 
         <div id="no-results" class="hidden text-center py-20">
@@ -84,6 +84,38 @@
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuZasKNYxYbalNRDmAflSHMCmZSRXlLYdeOyeqBzl94liVBLXeIIOwZHQUmW5bsSP9bPL_9HhD9gUM/pub?output=csv';
         let datosInmobiliarias = [];
 
+        // ✅ FIX 1: Normalización robusta de números de WhatsApp para Argentina
+        function normalizarWhatsApp(telefono) {
+            // Eliminar todo lo que no sea dígito
+            let wa = telefono.replace(/\D/g, '');
+            if (!wa) return '';
+
+            if (wa.startsWith('549')) {
+                // Ya tiene el formato correcto: 549XXXXXXXXXX
+                return wa;
+            } else if (wa.startsWith('54')) {
+                // Tiene código de país pero le falta el 9 móvil: 54XXXXXXXXXX → 549XXXXXXXXXX
+                return '549' + wa.slice(2);
+            } else if (wa.startsWith('0')) {
+                // Número local con 0 adelante: 011... → 549 11...
+                return '549' + wa.slice(1);
+            } else {
+                // Número local sin prefijo: 1136512684 → 5491136512684
+                return '549' + wa;
+            }
+        }
+
+        // ✅ FIX 2: Normalización de URLs web
+        function normalizarWeb(web) {
+            if (!web || web.trim() === '') return null;
+            const url = web.trim();
+            if (url.startsWith('http://') || url.startsWith('https://')) {
+                return url;
+            }
+            // Agrega https:// si falta
+            return 'https://' + url;
+        }
+
         async function init() {
             try {
                 const response = await fetch(CSV_URL);
@@ -94,12 +126,12 @@
                     const v = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if (v.length >= 7) {
                         return {
-                            nombre: v[0].replace(/"/g, '').trim(),
-                            direccion: v[1].replace(/"/g, '').trim(),
-                            barrio: v[2].replace(/"/g, '').trim(),
-                            telefono: v[3].replace(/"/g, '').trim(),
-                            email: v[4].replace(/"/g, '').trim(),
-                            web: v[5].replace(/"/g, '').trim(),
+                            nombre:       v[0].replace(/"/g, '').trim(),
+                            direccion:    v[1].replace(/"/g, '').trim(),
+                            barrio:       v[2].replace(/"/g, '').trim(),
+                            telefono:     v[3].replace(/"/g, '').trim(),
+                            email:        v[4].replace(/"/g, '').trim(),
+                            web:          v[5].replace(/"/g, '').trim(),
                             especialidad: v[6].replace(/"/g, '').trim()
                         };
                     }
@@ -109,6 +141,7 @@
                 renderizar(datosInmobiliarias);
             } catch (error) {
                 document.getElementById('counter').innerText = "Error en la conexión.";
+                console.error('Error al cargar CSV:', error);
             }
         }
 
@@ -127,15 +160,34 @@
             noResults.classList.add('hidden');
 
             lista.forEach(inmo => {
-                // Limpieza de WhatsApp: Solo números
-                let wa = inmo.telefono.replace(/\D/g,'');
-                if (wa.length > 0 && !wa.startsWith('54')) {
-                    wa = '549' + wa;
-                }
+                // ✅ Usar las funciones de normalización
+                const wa = normalizarWhatsApp(inmo.telefono);
+                const webUrl = normalizarWeb(inmo.web);
 
-                // URL de Google Maps corregida (concatenación simple para evitar errores)
                 const query = encodeURIComponent(inmo.nombre + ' ' + inmo.direccion + ' ' + inmo.barrio + ' CABA');
                 const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + query;
+
+                // Botón WEB: activo si hay URL, desactivado si no
+                const webBtn = webUrl
+                    ? `<a href="${webUrl}" target="_blank" rel="noopener noreferrer"
+                            class="flex-1 md:flex-none bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition flex items-center justify-center gap-2">
+                            WEB
+                        </a>`
+                    : `<span title="Sin sitio web registrado"
+                            class="flex-1 md:flex-none bg-slate-200 text-slate-400 px-5 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-not-allowed opacity-60">
+                            WEB
+                        </span>`;
+
+                // Botón WhatsApp: activo si hay número, desactivado si no
+                const waBtn = wa
+                    ? `<a href="https://wa.me/${wa}" target="_blank" rel="noopener noreferrer"
+                            class="flex-1 md:flex-none bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-green-600 shadow-sm transition">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>`
+                    : `<span title="Sin WhatsApp registrado"
+                            class="flex-1 md:flex-none bg-slate-200 text-slate-400 w-10 h-10 flex items-center justify-center rounded-xl cursor-not-allowed opacity-60">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </span>`;
 
                 const row = document.createElement('div');
                 row.className = "directory-row grid grid-cols-1 md:grid-cols-12 gap-4 p-5 md:items-center transition-all";
@@ -157,12 +209,8 @@
                     </div>
 
                     <div class="col-span-1 md:col-span-3 flex md:justify-end gap-2 mt-2 md:mt-0">
-                        <a href="https://wa.me/${wa}" target="_blank" class="flex-1 md:flex-none bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-xl hover:bg-green-600 shadow-sm transition">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                        </a>
-                        <a href="${inmo.web}" target="_blank" class="flex-1 md:flex-none bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition flex items-center justify-center gap-2">
-                            WEB
-                        </a>
+                        ${waBtn}
+                        ${webBtn}
                     </div>
                 `;
                 container.appendChild(row);
