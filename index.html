@@ -124,15 +124,20 @@
 
                 datosInmobiliarias = lines.slice(1).map(line => {
                     const v = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    if (v.length >= 7) {
+                    // Columnas reales del CSV:
+                    // 0:NOMBRE, 1:DIRECCION, 2:BARRIO, 3:VALUACIÓN,
+                    // 4:PHONE, 5:ANOTHERPHONE, 6:WHATSAPP, 7:WEBSITE,
+                    // 8:EMAIL, 9:ESPECIALIZAC, 10:VID, 11:LATLON
+                    const clean = i => (v[i] || '').replace(/"/g, '').trim();
+                    if (v.length >= 3 && clean(0) !== '') {
                         return {
-                            nombre:       v[0].replace(/"/g, '').trim(),
-                            direccion:    v[1].replace(/"/g, '').trim(),
-                            barrio:       v[2].replace(/"/g, '').trim(),
-                            telefono:     v[3].replace(/"/g, '').trim(),
-                            email:        v[4].replace(/"/g, '').trim(),
-                            web:          v[5].replace(/"/g, '').trim(),
-                            especialidad: v[6].replace(/"/g, '').trim()
+                            nombre:       clean(0),
+                            direccion:    clean(1),
+                            barrio:       clean(2),
+                            telefono:     clean(6), // columna WHATSAPP
+                            email:        clean(8), // columna EMAIL
+                            web:          clean(7), // columna WEBSITE
+                            especialidad: clean(9)  // columna ESPECIALIZAC
                         };
                     }
                     return null;
